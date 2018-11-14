@@ -1,0 +1,16 @@
+.ChangeBg {
+    width: 100%;
+    top: 4.5rem;
+    font-size: .5rem;
+    padding: 5px 1.6rem;
+    color: #fff;
+    box-sizing: border-box;
+}
+.changebg-icon-fa{
+    display: flex;
+}
+.changebg-arrow-down{
+    width: 1rem;
+    height: 1rem;
+    margin-left: .5rem;
+}
