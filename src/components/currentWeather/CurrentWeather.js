@@ -1,34 +1,44 @@
-import React, { Component } from 'react';
+import React, {
+  Component
+} from 'react';
 import './CurrentWeather.css';
-import axios from 'axios'
+import {
+  messages
+} from "../../utils/message.js";
 class CurrentWeather extends Component {
-  getWeatherInfo(){
-    axios.get('https://free-api.heweather.com/s6/weather?location=31.26451%2C121.50515&key=5aeaeee5b8ad4a658b963c722ddfc645')
-    .then(function (response) {
-      console.log(response);
-     
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  constructor(props) {
+    super(props)
+    this.state = {
+      weatherInfo: '',
+      city: '',
+      data: props.weatherInfo
+    }
   }
-  componentDidMount(){
-    this.getWeatherInfo()
+  componentWillReceiveProps(nextProps) {
+
+  }
+  componentWillMount() {
+    console.log(messages())
   }
   render() {
+    let weatherInfo = this.props.weatherInfo
     return (
-      <div className="CurrentWeather">
-         <div className='CurrentWeather-area'>
-             <div className='CurrentWeather-left'>虹口</div>
-             <div  className='CurrentWeather-right'>2018/11/09 14:38更新</div>
-         </div>
-         <div>
-              <div className='CurrentWeather-tips'>据说每天两点 , 是注意力最集中的时刻哦~</div>
-              <div className='CurrentWeather-temper'> 16°</div>
-              <div className='CurrentWeather-qing'>晴</div>
-              <div className='CurrentWeather-qing-zk'>优 38</div>
-         </div>
+      <div>
+        <div className="CurrentWeather" >
+          <div className='CurrentWeather-area'>
+            <div className='CurrentWeather-left'> {weatherInfo.city} </div>
+            <div className='CurrentWeather-right'> {weatherInfo.updateTime} 更新 </div>
+          </div>
+          <div>
+            <div className='CurrentWeather-tips'> {messages()} </div>
+            <div className='CurrentWeather-temper'> {weatherInfo.tem}° </div>
+            <div className='CurrentWeather-qing' > {weatherInfo.currentWeather} </div>
+            <div className='CurrentWeather-qing-zk' > {weatherInfo.qlty} {weatherInfo.aqi} </div>
+          </div>
+        </div>
+
       </div>
+
     );
   }
 }

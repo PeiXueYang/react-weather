@@ -6,10 +6,10 @@ class ChangeBg extends Component {
     return (
       <div className="ChangeBg">
         <div className='changebg-icon-fa'>
-           <div>点击切换背景</div>
-           <div>
-             <img  src={require('../../images/down-arrow.png')}  className='changebg-arrow-down' alt='img' />
-           </div>
+          <div>点击切换背景</div>
+          <div>
+            <img src={require('../../images/down-arrow.png')} className='changebg-arrow-down' alt='img' />
+          </div>
         </div>
       </div>
     );

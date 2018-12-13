@@ -1,0 +1,1 @@
+export const getWeatherApi = 'https://free-api.heweather.com/v5/weather?key=19713447578c4afe8c12a351d46ea922'

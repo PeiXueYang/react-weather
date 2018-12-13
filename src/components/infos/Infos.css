@@ -13,6 +13,16 @@
     font-size: .7rem;
     text-align: center;
 }
+.fa-info-item{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    background:rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: .7rem;
+    text-align: center;
+    border: 1px solid #fff;
+}
 .infos-items{
     width: 25%;
     height: 3rem;
@@ -56,4 +66,8 @@
 .list-right{
     padding-left: 2rem;
     line-height: 1.4rem;
+}
+.infosbox{
+    display: flex;
+    flex-wrap: wrap;
 }
