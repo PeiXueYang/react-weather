@@ -11,8 +11,8 @@ import axios from "axios";
 import {
   getWeatherApi
 } from "../../utils/api.js";
-// import 'antd/dist/antd.css';
-// import { Button } from 'antd';
+import 'antd/dist/antd.css';
+import { message } from 'antd';
 class Container extends Component {
   constructor(props) {
     super(props);
@@ -46,7 +46,6 @@ class Container extends Component {
   }
   //获取天气信息
   getWeatherInfo(searchCity) {
-    // console.log(searchCity, 'serachCity')
     //这里加一个参数 searchCity 是通过input框来查询天气
     //如果存在 就查询 搜索城市的天气 否则 查询当前位置天气
     let that = this;
@@ -69,34 +68,50 @@ class Container extends Component {
             }
           })
           .then(function (res) {
-            WeatherLists = res.data.HeWeather5[0];
-            console.log(WeatherLists);
-            that.setState({
-              weatherInfo: {
-                city: WeatherLists.basic.city,
-                tem: WeatherLists.now.tmp,
-                updateTime: WeatherLists.basic.update.loc,
-                currentWeather: WeatherLists.now.cond.txt,
-                qlty: WeatherLists.aqi.city.qlty,
-                aqi: WeatherLists.aqi.city.aqi
-              },
-              temper: {
-                fl: WeatherLists.now.fl,
-                hum: WeatherLists.now.hum,
-                pcpn: WeatherLists.now.pcpn,
-                pres: WeatherLists.now.pres,
-                tem: WeatherLists.now.tmp,
-                vis: WeatherLists.now.vis
-              },
-              wind: {
-                deg: WeatherLists.now.wind.deg,
-                dir: WeatherLists.now.wind.dir,
-                sc: WeatherLists.now.wind.sc,
-                spd: WeatherLists.now.wind.spd
-              },
-              dailyforecast: WeatherLists.daily_forecast,
-              suggestion: WeatherLists.suggestion
-            });
+            if (200 === res.status) {
+              let status = res.data.HeWeather5[0]['status']
+              if (searchCity && (status !== 'unknown city')) {
+                message.success('查询成功.')
+              }
+              else if (searchCity && (status == 'unknown city')) {
+                message.error('查询失败.')
+                return false
+              }
+              WeatherLists = res.data.HeWeather5[0];
+              that.setState({
+                weatherInfo: {
+                  city: WeatherLists.basic.city,
+                  tem: WeatherLists.now.tmp,
+                  updateTime: WeatherLists.basic.update.loc,
+                  currentWeather: WeatherLists.now.cond.txt,
+                  qlty: WeatherLists.aqi.city.qlty,
+                  aqi: WeatherLists.aqi.city.aqi
+                },
+                temper: {
+                  fl: WeatherLists.now.fl,
+                  hum: WeatherLists.now.hum,
+                  pcpn: WeatherLists.now.pcpn,
+                  pres: WeatherLists.now.pres,
+                  tem: WeatherLists.now.tmp,
+                  vis: WeatherLists.now.vis
+                },
+                wind: {
+                  deg: WeatherLists.now.wind.deg,
+                  dir: WeatherLists.now.wind.dir,
+                  sc: WeatherLists.now.wind.sc,
+                  spd: WeatherLists.now.wind.spd
+                },
+                dailyforecast: WeatherLists.daily_forecast,
+                suggestion: WeatherLists.suggestion
+              });
+
+            }
+            else {
+              if (searchCity) {
+                message.error('查询失败.')
+
+              }
+            }
           });
       }
     });

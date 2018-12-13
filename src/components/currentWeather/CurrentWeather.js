@@ -18,7 +18,6 @@ class CurrentWeather extends Component {
 
   }
   componentWillMount() {
-    console.log(messages())
   }
   render() {
     let weatherInfo = this.props.weatherInfo
